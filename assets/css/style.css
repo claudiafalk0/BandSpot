@@ -1,4 +1,58 @@
-.btn-group{
-    margin-left: .5em;
-    align-content: flex-start !important;
+#navBar {
+    display: grid;
+    grid-template-columns: 12em auto  6em 6em;
+    grid-template-rows: 3em;
 }
+
+#search{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-start: 1;
+    align-self: center;
+    text-align: center;
+}
+
+#title{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-start: 1;
+    align-self: center;
+    text-align: center;
+}
+
+#favoriteSongs{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-start: 1;
+    align-self: center;
+    text-align: center;
+}
+
+#favoriteArtists{
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-start: 1;
+    align-self: center;
+    text-align: center;
+}
+
+img {
+    width: 3em;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+/* body {
+    background-image: url(https://github.com/claudiafalk0/BandSpot/blob/Claudia/assets/images/concert-red.jpg?raw=true);
+    background-repeat: no-repeat;
+    height: 100%;
+    width: auto;
+} */
