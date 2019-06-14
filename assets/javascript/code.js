@@ -1,1 +1,7 @@
-alert("Javascript is connected")
+$(".dropdown")
+
+$( document ).ready(function){
+    $(".dropdown-trigger").dropdown({
+        hover:false
+    });
+}
