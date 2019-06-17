@@ -1,6 +1,6 @@
 #navBar {
     display: grid;
-    grid-template-columns: 12em auto  6em 6em;
+    grid-template-columns: 12em auto  6em 2em 6em;
     grid-template-rows: 3em;
 }
 
@@ -32,8 +32,8 @@
 }
 
 #favoriteArtists{
-    grid-column-start: 4;
-    grid-column-end: 5;
+    grid-column-start: 5;
+    grid-column-end: 6;
     grid-row-start: 1;
     grid-row-start: 1;
     align-self: center;
@@ -51,23 +51,44 @@ select {
     text-overflow: '';
 }
 
+.mainmenubtn {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.mainmenubtn:hover {
+    background-color: red;
+    }
+
 .dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-child {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 8em;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
     z-index: 1;
   }
-  
-  .dropdown:hover .dropdown-content {
+
+.dropdown-child a {
+    color: black;
+    text-decoration: none;
+    display: block
+}
+.dropdown:hover .dropdown-child {
     display: block;
-  }
+}
+
+.dropdown-child2{
+    right: 0;
+}
+
 /* body {
     background-image: url(https://github.com/claudiafalk0/BandSpot/blob/Claudia/assets/images/concert-red.jpg?raw=true);
     background-repeat: no-repeat;
