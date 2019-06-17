@@ -1,4 +1,4 @@
-body{
+body {
     color: white;
     background-image: url(https://github.com/claudiafalk0/BandSpot/blob/Claudia/assets/images/concert-red.jpg?raw=true);
     background-repeat: no-repeat;
@@ -6,9 +6,8 @@ body{
     height: 300vh;
 }
 
-header{
-    position: fixed;
-    width: 100%;
+#Image {
+    width: 15em;
 }
 
 #navBar {
@@ -90,9 +89,56 @@ header{
     display: block;
 }
 
-.listPicture{
+.listPicture {
     float: left;
     width: 2em;
     border: 1px solid white;
 }
 
+#musicInfo {
+    display: grid;
+    grid-template-columns: 5em 15em 2em auto 2em 20em;
+    grid-template-rows: 5em 10em auto 10em;
+    margin-top: 3em;
+}
+
+#artistName {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    text-align: center;
+    align-self: center;
+    font-size: 2em;
+}
+
+#artistImage {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+#bio {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+#widgetPlacement {
+    display: grid;
+    margin-top: 3em;
+    grid-template-columns: 5em auto 5em;
+    grid-template-rows: auto;
+
+}
+
+#widget {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    text-align: center;
+    align-self: center;
+}
