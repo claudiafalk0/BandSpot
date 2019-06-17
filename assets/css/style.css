@@ -68,16 +68,14 @@ body {
 }
 
 .dropdown-child {
-    display: none;
+    display: grid;
     position: absolute;
-    max-width: 10em;
     min-width: 10em;
     max-height: 2em;
-    box-shadow: 0em 1em 2em 0em rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0em 1em 2em 0em rgba(0, 0, 0, 0.2); */
     padding: .5em;
     z-index: 1;
     background: transparent;
-    border-radius: .5em;
 }
 
 .dropdown-child a {
@@ -111,6 +109,7 @@ body {
     text-align: center;
     align-self: center;
     font-size: 2em;
+
 }
 
 #artistImage {
