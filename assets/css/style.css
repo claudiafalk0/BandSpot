@@ -1,2 +1,4 @@
-body{
+.btn-group{
+    margin-left: .5em;
+    align-content: flex-start !important;
 }
