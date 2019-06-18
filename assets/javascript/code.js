@@ -24,29 +24,32 @@ $(".input-group-append").on("click", ".dropdown-item", function () {
 $("#album_search_button").on("click", function () {
   event.preventDefault();
   var album_search_str = $("#album_search_text").val().trim();
-  var queryURL_Album_Search = back_end_proxy + "https://api.deezer.com/search?q=album:" + album_search_str + "&api_key=" + api_key;
 
-  $("#album_search_text").val("");
-  $.get({ url: queryURL_Album_Search, }).then(function (response) {
+  if (album_search_str != "") {
 
-    album_ids = [];
-    album_titles = [];
-    console.log(response);
-    var mydata = response.data;
-    mydata.forEach(function (item, i) {
-      // need to pass on mulitple listings of same album
-      if ((album_ids.indexOf(item.album.id) == -1) && (album_titles.indexOf(item.album.title) == -1)){
-        album_ids.push(item.album.id);
-        album_titles.push(item.album.title);
-        var new_list_item = $("<div>");
-        new_list_item.addClass("dropdown-item");
-        new_list_item.attr("data-album-id", item.album.id);
-        new_list_item.text(item.artist.name + " : " + item.album.title);
-        $("#album_search_dropdown").append(new_list_item);
-      }
+    var queryURL_Album_Search = back_end_proxy + "https://api.deezer.com/search?q=album:" + album_search_str + "&api_key=" + api_key;
+
+    $("#album_search_text").val("");
+    $.get({ url: queryURL_Album_Search, }).then(function (response) {
+
+      album_ids = [];
+      album_titles = [];
+      console.log(response);
+      var mydata = response.data;
+      mydata.forEach(function (item, i) {
+        // need to pass on mulitple listings of same album
+        if ((album_ids.indexOf(item.album.id) == -1) && (album_titles.indexOf(item.album.title) == -1)) {
+          album_ids.push(item.album.id);
+          album_titles.push(item.album.title);
+          var new_list_item = $("<div>");
+          new_list_item.addClass("dropdown-item");
+          new_list_item.attr("data-album-id", item.album.id);
+          new_list_item.text(item.artist.name + " : " + item.album.title);
+          $("#album_search_dropdown").append(new_list_item);
+        }
+      });
     });
-
-  });
+  }
 });
 
 
@@ -65,8 +68,9 @@ function show_album() {
     album_cover.attr("src", response.cover_medium);
     $("#band-info").append(album_cover);
     $("#band-info").append("<br><br>");
+    $("#album_search_dropdown").empty();
 
-    
+
   });
 
   var widget_album = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=album&id=" + album_id + "&app_id=353884";
