@@ -7,13 +7,22 @@ body {
     font-family: Arial, Helvetica, sans-serif
 }
 
+input{
+    border-radius: 2px;
+}
+
+#album_search_button{
+    width: 10em;
+    border-radius: 1em;
+}
+
 #Image {
     width: 15em;
 }
 
 #navBar {
     display: grid;
-    grid-template-columns: 12em 12em auto 24em;
+    grid-template-columns: 12em 12em auto 12em 12em;
     grid-template-rows: 3em;
 }
 
@@ -23,6 +32,8 @@ body {
     grid-row-start: 1;
     align-self: center;
     text-align: center;
+    background-color: whitesmoke;
+    height: 1.36em;
 }
 
 .input-group-append {
@@ -35,6 +46,10 @@ body {
 }
 
 #title {
+    margin-top: 1em;
+    font-family: 'Rock Salt', cursive;
+    color: yellow;
+    font-size: 2em;
     grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 1;
@@ -61,7 +76,7 @@ body {
 } */
 
 .mainmenubtn {
-    background-color: transparent;
+    background-color: whitesmoke;;
     color: black;
     border: none;
     cursor: pointer;
@@ -75,7 +90,7 @@ body {
 }
 
 .dropdown-child{
-    display: grid;
+    display: none;
 }
 
 .dropdown-child,

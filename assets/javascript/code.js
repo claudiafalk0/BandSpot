@@ -59,6 +59,7 @@ $("#album_search_button").on("click", function (event) {
         });
     });
     $("#album_search_dropdown").empty();
+    $("#album_search_text").val("");
 });
 
 
