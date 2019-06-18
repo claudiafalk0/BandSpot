@@ -8,19 +8,29 @@
   <title>BandSpot</title>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="assets/css/style.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
   <script src="https://kit.fontawesome.com/0eb0065a69.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
   <header>
     <div id="navBar">
 
-      <div id="search">
-        <input id="SearchForArtist" type="search" placeholder="Search..">
-        <input id="submitBtn" type="submit">
-        <!-- <input type="text" type-page="player" style="width: 250px;" id-search-result="search_results_album"> -->
-      </div>
+        <input id="album_search_text" type="text" class="form-control" aria-label="Text input with dropdown button">
+        <div class="input-group-append">
+          <button id="album_search_button" class="dropdown-toggle" type="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Album Search</button>
+          <div id="album_search_dropdown" class="dropdown-menu">
+          </div>
+        </div>
 
       <div id="title">
         AlbumSpot
@@ -29,11 +39,11 @@
       <div class="dropdown" id="favoriteSongs">
         <button class="mainmenubtn">Main menu</button>
         <div class="dropdown-child">
-            <a class="listAlbum" href="https://www.google.com/">
-              <img class="listPicture" src="../../Homework/Basic-Portfolio/assets/images/square.png">
-              Curtain Calls
-              <small class="listArtist">Eminem</small>
-            </a>
+          <a class="listAlbum" href="https://www.google.com/">
+            <img class="listPicture" src="../../Homework/Basic-Portfolio/assets/images/square.png">
+            Curtain Calls
+            <small class="listArtist">Eminem</small>
+          </a>
         </div>
       </div>
   </header>
@@ -41,68 +51,22 @@
   <section>
     <div id="musicInfo">
       <div id="artistName">
-        Artist Name
       </div>
       <div id="artistImage">
-        <img id="Image" src="../../Homework/Basic-Portfolio/assets/images/square.png" alt="">
       </div>
       <div id="bio">
-
       </div>
     </div>
   </section>
 
   <section>
-   <div id="widgetPlacement">
+    <div id="widgetPlacement">
       <div id="widget">
-          PLACE WIDGET HERE
+        <div class="deezer-widget-player" data-scrolling="no" data-frameborder="0" data-allowTransparency="true"
+          data-width="700" data-height="350"></div>
       </div>
-   </div>
+    </div>
   </section>
 </body>
 <script src="assets/javascript/code.js"></script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>AlbumSpot</title>
-</head>
-
-<body></body>
-<h1>AlbumSpot</h1>
-
-<div class="input-group">
-    <input id="album_search_text" type="text" class="form-control" aria-label="Text input with dropdown button">
-    <div class="input-group-append">
-        <button id="album_search_button" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Album Search</button>
-        <div id="album_search_dropdown" class="dropdown-menu">
-            <!-- <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a> -->
-        </div>
-    </div>
-</div>
-
-
-
-
-<div id="band-info"></div>
-<div class="deezer-widget-player" data-scrolling="no" data-frameborder="0" data-allowTransparency="true"
-    data-width="700" data-height="350"></div>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  -->
-<script src="assets/javascript/code.js"></script>
-
 </html>

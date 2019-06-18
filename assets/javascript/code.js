@@ -1,68 +1,16 @@
-$("#submitBtn").on("click", function () {
-    var artist = "DJ khalid"
-    var api_key = "4449581c4e4db7c380fae2d8fd50142d"
-    var method = "artist.getinfo"
-
-    // Constructing a queryURL using the animal name
-    var queryURL = "http://ws.audioscrobbler.com/2.0/?method=" + method + "&artist=" + artist + "&api_key=" + api_key + "&format=json&autocorrect=1";
-
-    // Performing an AJAX request with the queryURL
-    $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-        // After data comes back from the request
-        .then(function (response) {
-            console.log(queryURL);
-
-            console.log(response);
-            // storing the data from the AJAX request in the results variable
-            var results = response.artist.bio.summary;
-
-            var values = results.split(" <").shift();
-
-            $("#bio").text(values)
-        });
-});
-
-
-
 // Deedzer api key 6f4d1eb22866cf66982fcd2dcbcdce2b
-
-
 var api_key = "6f4d1eb22866cf66982fcd2dcbcdce2b"
 var back_end_proxy = "https://cors-anywhere.herokuapp.com/";
 var album_id = "";
-
-
-// var band = "Chet Baker";
-//var queryURL_Artist = back_end_proxy + "https://api.deezer.com/search/?q=" + band + "&api_key=" + api_key;
-
-// $.get({ url: queryURL_Artist, }).then(function (response) {
-//   console.log(response);
-//   var mydata = response.data;
-
-//   console.log(mydata[0].title);
-
-//   mydata.forEach(function (item) {
-//     console.log(item.title);
-//     $("#band-info").append(item.title + "<br>");
-//   });
-// });
-
-//https://api.deezer.com/search?q=b&api_key=6f4d1eb22866cf66982fcd2dcbcdce2b
-//https://api.deezer.com/search?q=album:"good things"
-
 
 $("#album_search_text").on("keyup", function () {
   $("#album_search_dropdown").empty();
 });
 
 $(".input-group-append").on("click", ".dropdown-item", function () {
-
   console.log($(this).attr("data-album-id"));
   album_id = $(this).attr("data-album-id");
-
+  $("#album_search_dropdown").empty();
   show_album();
 });
 
@@ -71,18 +19,19 @@ $("#album_search_button").on("click", function () {
   var album_search_str = $("#album_search_text").val().trim();
   var queryURL_Album_Search = back_end_proxy + "https://api.deezer.com/search?q=album:" + album_search_str + "&api_key=" + api_key;
 
-  $.get({ url: queryURL_Album_Search, }).then(function (response) {
+  $.get({ url: queryURL_Album_Search, async: false,}).then(function (response) {
 
     var mydata = response.data;
     mydata.forEach(function (item) {
       var new_list_item = $("<div>");
       new_list_item.addClass("dropdown-item");
       new_list_item.attr("data-album-id", item.album.id);
-      new_list_item.text(item.album.title);
+      new_list_item.text(item.title);
       $("#album_search_dropdown").append(new_list_item);
     });
 
   });
+  $("#album_search_dropdown").empty();
 });
 
 
@@ -90,22 +39,20 @@ function show_album() {
 
   var queryURL_Album = back_end_proxy + "https://api.deezer.com/album/" + album_id + "&api_key=" + api_key;
 
-  $("#band-info").empty();
+  $.get({ url: queryURL_Album, async: false}).then(function (response) {
 
-  $.get({ url: queryURL_Album, }).then(function (response) {
-
-    $("#band-info").append("<br>" + response.artist.name + " - ");
-    $("#band-info").append(response.title + "<br><br>");
+    $("#artistName").text(response.artist.name);
+    // $("#musicInfo").append(response.title);
+    console.log(response.artist.name)
 
     var album_cover = $("<img>");
     album_cover.attr("src", response.cover_medium);
-    $("#band-info").append(album_cover);
-    $("#band-info").append("<br><br>");
+    $("#artistImage").html(album_cover);
 
     // var album_tracks = response.tracks.data;
     // album_tracks.forEach(function (item) {
     //   console.log(item.title);
-    //   $("#band-info").append(item.title + "<br>");
+    //   $("#musicInfo").append(item.title + "<br>");
     // });
   });
 
@@ -129,3 +76,32 @@ function show_album() {
   }());
 
 }
+
+$("#submitBtn").on("click", function () {
+    var artist = "DJ khalid"
+    var api_key = "4449581c4e4db7c380fae2d8fd50142d"
+    var method = "artist.getinfo"
+
+    // Constructing a queryURL using the animal name
+    var queryURL = "http://ws.audioscrobbler.com/2.0/?method=" + method + "&artist=" + artist + "&api_key=" + api_key + "&format=json&autocorrect=1";
+
+    // Performing an AJAX request with the queryURL
+    $.ajax({
+            url: queryURL,
+            method: "GET",
+            async: false,
+        })
+        // After data comes back from the request
+        .then(function (response) {
+            console.log(queryURL);
+
+            console.log(response);
+            // storing the data from the AJAX request in the results variable
+            var results = response.artist.bio.summary;
+
+            var values = results.split(" <").shift();
+
+            $("#bio").text(values)
+        });
+});
+

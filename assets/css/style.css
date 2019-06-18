@@ -1,6 +1,6 @@
 body {
-    color: white;
-    background-image: url(https://github.com/claudiafalk0/BandSpot/blob/Claudia/assets/images/concert-red.jpg?raw=true);
+    color: black;
+    /* background-image: url(https://github.com/claudiafalk0/BandSpot/blob/Claudia/assets/images/concert-red.jpg?raw=true); */
     background-repeat: no-repeat;
     background-size: cover;
     height: 300vh;
@@ -13,37 +13,43 @@ body {
 
 #navBar {
     display: grid;
-    grid-template-columns: 12em auto 6em 2em 6em;
+    grid-template-columns: 12em 12em auto 24em;
     grid-template-rows: 3em;
 }
 
-#search {
+#album_search_text {
     grid-column-start: 1;
     grid-column-end: 2;
-    grid-row-start: 1;
     grid-row-start: 1;
     align-self: center;
     text-align: center;
 }
 
-#title {
+.input-group-append {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
+    display: block;
+    margin: auto;
+    justify-self: center;
+}
+
+#title {
+    grid-column-start: 3;
+    grid-column-end: 4;
     grid-row-start: 1;
     align-self: center;
     text-align: center;
 }
 
 #favoriteSongs {
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 1;
+    grid-column-start: 4;
+    grid-column-end: 5;
     grid-row-start: 1;
     align-self: center;
     text-align: center;
 }
-
+/* 
 #favoriteArtists {
     grid-column-start: 5;
     grid-column-end: 6;
@@ -51,7 +57,7 @@ body {
     grid-row-start: 1;
     align-self: center;
     text-align: center;
-}
+} */
 
 .mainmenubtn {
     background-color: transparent;
@@ -68,7 +74,7 @@ body {
 }
 
 .dropdown-child {
-    display: grid;
+    display: none;
     position: absolute;
     min-width: 10em;
     max-height: 2em;
@@ -109,7 +115,6 @@ body {
     text-align: center;
     align-self: center;
     font-size: 2em;
-
 }
 
 #artistImage {
