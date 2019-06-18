@@ -59,5 +59,3 @@ function geoLocate(){
             
         })
     }
-
-  

@@ -2,7 +2,6 @@
 var api_key = "6f4d1eb22866cf66982fcd2dcbcdce2b"
 var back_end_proxy = "https://cors-anywhere.herokuapp.com/";
 var album_id = "";
-var artistBio = "";
 var summary_api_key = "4449581c4e4db7c380fae2d8fd50142d"
 var summary_method = "artist.getinfo"
 var summaryURL = "http://ws.audioscrobbler.com/2.0/?method=" + summary_method + "&api_key=" + summary_api_key + "&format=json&autocorrect=1";
@@ -11,18 +10,36 @@ $("#album_search_text").on("keyup", function () {
     $("#album_search_dropdown").empty();
 });
 
-$(".input-group-append").on("click", ".dropdown-item", function () {
+$(".input-group-append").on("click", ".dropdown-item", function (event) {
+    event.preventDefault();
+
     console.log($(this).attr("data-album-id"));
     album_id = $(this).attr("data-album-id");
 
     $("#album_search_dropdown").empty();
 
-    show_album();
 
     $(".ticketMaster").show().css("display", "block")
+    show_album();
 });
 
-$("#album_search_button").on("click", function () {
+function artist(summaryURL) {
+    $.ajax({
+            url: summaryURL,
+            method: "GET",
+        })
+        .then(function (response) {
+            var results = (response.artist.bio.summary);
+            console.log(results)
+            var values = results.split(" <").shift();
+
+            $("#bio").text(values);
+        });
+}
+
+$("#album_search_button").on("click", function (event) {
+
+    event.preventDefault();
 
     var album_search_str = $("#album_search_text").val().trim();
     var queryURL_Album_Search = back_end_proxy + "https://api.deezer.com/search?q=album:" + album_search_str + "&api_key=" + api_key;
@@ -42,11 +59,10 @@ $("#album_search_button").on("click", function () {
         });
     });
     $("#album_search_dropdown").empty();
-    $("#bio").empty()
 });
 
 
-function show_album() {
+function show_album(queryURL_Album) {
 
     var queryURL_Album = back_end_proxy + "https://api.deezer.com/album/" + album_id + "&api_key=" + api_key;
 
@@ -61,10 +77,10 @@ function show_album() {
         album_cover.attr("src", response.cover_medium);
         $("#artistImage").html(album_cover);
 
-        artistBio += "&artist=" + artistName;
+        var artistBio = "&artist=" + artistName;
         summaryURL += artistBio;
         console.log(artistBio)
-
+        console.log(summaryURL)
         artist(summaryURL);
     });
 
@@ -86,22 +102,4 @@ function show_album() {
             w[i].appendChild(el);
         }
     }());
-}
-
-function artist() {
-    // Performing an AJAX request with the queryURL
-    $.ajax({
-            url: summaryURL,
-            method: "GET",
-        })
-        // After data comes back from the request
-        .then(function (response) {
-            console.log(response)
-            // storing the data from the AJAX request in the results variable
-            var results = (response.artist.bio.summary);
-            console.log(results)
-            var values = results.split(" <").shift();
-
-            $("#bio").text(values);
-        });
 }
