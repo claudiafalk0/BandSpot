@@ -36,7 +36,9 @@ function geoLocate(){
                 var address = results._embedded.venues[0].address.line1;
                 var city = results._embedded.venues[0].city.name;
                 var state = results._embedded.venues[0].state.stateCode;
+                var tickets = results.url;
 
+                console.log(tickets);
 
                 var newRow = $("<tr>").append(
                     $("<td>").text(name),
@@ -45,71 +47,17 @@ function geoLocate(){
                     $("<td>").text(venueName),
                     $("<td>").text(address),
                     $("<td>").text(city),
-                    $("<td>").text(state)
+                    $("<td>").text(state),
+                    $("<td>").html("<a target = _blank input href =" + tickets + ">Get tickets</a>")
                     );
-                    
+                    console.log(tickets)
                     // Append the new row to the table
                     $("tbody").append(newRow);
                 
                 }
-
-
+                
             
         })
     }
-    // POST /tm-3pi-api/v1/bookings HTTP/1.1
-    // Host: partner.com
-    // X-Target-URI: https://partner.com
-    // Connection: Keep-Alive
-    
-    // {
-    //   "language": "es-es",
-    //   "channel_info": {
-    //     "channel_type": "OUTLET",
-    //     "subChannelName": "FNACV ZGZ.ESPA�A"  },
-    //   "event_id": "event_3p",
-    //   "last_modification": "2018-07-19T07:15:12Z",
-    //   "searches": [
-    //     {
-    //       "index": "1",
-    //       "accept_alternate": [],
-    //       "search_type": "BESTAVAIL",
-    //       "bestavail": {
-    //         "areas": [],
-    //         "price_level_ids": [],
-    //         "price_types": [
-    //           {
-    //             "id": "price_type_3p",
-    //             "quantity": "2"
-    //           }
-    //         ]
-    //       },
-    //     },
-    //     {
-    //       "index": "2",
-    //       "accept_non_adjacent": false,
-    //       "accept_alternate": [],
-    //       "search_type": "SPECIFIC",
-    //       "specific": {
-    //         "tickets": [
-    //           {
-    //             "price_level_id": "price_level_3p_1",
-    //             "price_type_id": "price_type_3p",
-    //             "level": "L1_3p",
-    //             "section": "202_3p",
-    //             "row": "3p_R1",
-    //             "seat": "3p_3"
-    //           },
-    //           {
-    //             "price_level_id": "price_level_3p_1",
-    //             "price_type_id": "price_type_3p",
-    //             "level": "L1_3p",
-    //             "section": "202_3p",
-    //             "row": "3p_R1",
-    //             "seat": "3p_4"
-    //           }
-    //         ]
-    //       }
-    //     }
-    //   ]
-    // }
+
+  
