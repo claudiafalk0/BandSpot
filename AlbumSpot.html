@@ -36,13 +36,12 @@
         AlbumSpot
       </div>
 
-      <div class="dropdown" id="favoriteSongs">
+      <div class="dropdown" id="history">
         <button class="mainmenubtn">Previously Viewed</button>
         <div class="dropdown-child">
-          <a class="listAlbum" href="https://www.google.com/">
-            <img class="listPicture" src="../../Homework/Basic-Portfolio/assets/images/square.png">
-            Curtain Calls
-            <small class="listArtist">Eminem</small>
+            <div id="listAlbum"></div>
+            <div class="listPicture"></div>
+            <small class="listArtist"></small>
           </a>
         </div>
       </div>
@@ -59,16 +58,27 @@
     </div>
   </section>
 
-  <div>
-      <a id="ticketBtn" href="index.html" target="_blank"><i class="fas fa-ticket-alt"></i> Click Here to Find A Concert! <i class="fas fa-ticket-alt"></i></a>
-  </div>
-
   <section>
     <div id="widgetPlacement">
       <div id="widget">
         <div class="deezer-widget-player" data-scrolling="no" data-frameborder="0" data-allowTransparency="true"
-          data-width="700" data-height="350"></div>
+          data-width="600" data-height="350"></div>
       </div>
+
+      <table class="ticketMaster">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Venue Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">City</th>
+              <th scope="col">State</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
     </div>
   </section>
 </body>

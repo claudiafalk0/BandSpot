@@ -14,15 +14,12 @@ $("#album_search_text").on("keyup", function () {
 $(".input-group-append").on("click", ".dropdown-item", function () {
     console.log($(this).attr("data-album-id"));
     album_id = $(this).attr("data-album-id");
+
     $("#album_search_dropdown").empty();
 
     show_album();
 
-    $("#ticketBtn").show().css("display", "block");
-    $("#bio").empty();
-    artist();
-
-    $("#history").prepend();
+    $(".ticketMaster").show().css("display", "block")
 });
 
 $("#album_search_button").on("click", function () {
@@ -44,6 +41,8 @@ $("#album_search_button").on("click", function () {
             $("#album_search_dropdown").append(new_list_item);
         });
     });
+    $("#album_search_dropdown").empty();
+    $("#bio").empty()
 });
 
 
@@ -65,6 +64,7 @@ function show_album() {
         artistBio += "&artist=" + artistName;
         summaryURL += artistBio;
         console.log(artistBio)
+
         artist(summaryURL);
     });
 
@@ -96,13 +96,12 @@ function artist() {
         })
         // After data comes back from the request
         .then(function (response) {
-
             console.log(response)
             // storing the data from the AJAX request in the results variable
             var results = (response.artist.bio.summary);
             console.log(results)
             var values = results.split(" <").shift();
 
-            $("#bio").text(values)
+            $("#bio").text(values);
         });
 }

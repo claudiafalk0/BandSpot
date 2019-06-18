@@ -1,6 +1,6 @@
 body {
-    color: black;
-    /* background-image: url(https://github.com/claudiafalk0/BandSpot/blob/Claudia/assets/images/concert-red.jpg?raw=true); */
+    color: white;
+    background-image: url(https://github.com/claudiafalk0/BandSpot/blob/Claudia/assets/images/concert-red.jpg?raw=true);
     background-repeat: no-repeat;
     background-size: cover;
     height: 300vh;
@@ -42,7 +42,7 @@ body {
     text-align: center;
 }
 
-#favoriteSongs {
+#history {
     grid-column-start: 4;
     grid-column-end: 5;
     grid-row-start: 1;
@@ -74,9 +74,12 @@ body {
     border-radius: 1rem;
 }
 
+.dropdown-child{
+    display: grid;
+}
+
 .dropdown-child,
 #album_search_dropdown {
-    display: none;
     position: absolute;
     min-width: 9em;
     max-height: 2em;
@@ -87,7 +90,7 @@ body {
 }
 
 .dropdown-child a {
-    color: antiquewhite;
+    color: white;
     text-decoration: none;
     display: block
 }
@@ -136,10 +139,8 @@ body {
 
 #widgetPlacement {
     display: grid;
-    margin-top: 3em;
-    grid-template-columns: 5em auto 5em;
+    grid-template-columns:1em 37.5em auto 1em;
     grid-template-rows: auto;
-
 }
 
 #widget {
@@ -147,13 +148,12 @@ body {
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 1;
-    text-align: center;
-    align-self: center;
 }
 
-#ticketBtn{
-    text-decoration: none;
+.ticketMaster {
     display: none;
-    color: black;
-    text-align: center;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 1;
 }
