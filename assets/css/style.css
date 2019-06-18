@@ -11,6 +11,11 @@ input{
     border-radius: 2px;
 }
 
+header{
+    position: fixed;
+    width: 100%;
+}
+
 #album_search_button{
     width: 10em;
     border-radius: 1em;
@@ -46,7 +51,6 @@ input{
 }
 
 #title {
-    margin-top: 1em;
     font-family: 'Rock Salt', cursive;
     color: yellow;
     font-size: 2em;
@@ -124,7 +128,7 @@ input{
     display: grid;
     grid-template-columns: 5em 15em 2em auto 2em 20em;
     grid-template-rows: 5em 10em auto 10em;
-    margin-top: 3em;
+    padding-top: 4em;
 }
 
 #artistName {
