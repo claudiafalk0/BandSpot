@@ -15,31 +15,49 @@
 
 <div class="input-group">
     <input id="album_search_text" type="text" class="form-control" aria-label="Text input with dropdown button">
-    <div class="input-group-append">
-        <button id="album_search_button" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Album Search</button>
+    <div id= "alist" class="input-group-append">
+        <button id="album_search_button" class="btn btn-outline-secondary dropdown-toggle" type="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Album Search</button>
         <div id="album_search_dropdown" class="dropdown-menu">
+        </div>
+    </div>
+</div>
+
+<div class="input-group">
+    <input id="viewed_text" type="text" class="form-control" aria-label="Text input with dropdown button">
+    <div id="vlist" class="input-group-append">
+        <button id="viewed_list_button" class="btn btn-outline-secondary dropdown-toggle" type="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Viewed Albums</button>
+        <div id="viewed_list_dropdown" class="dropdown-menu">
         </div>
     </div>
 </div>
 
 
 
+<!-- <button id="delete_button" type="button">Delete </button> -->
 
-<div id="band-info"></div>
-<div class="deezer-widget-player" data-scrolling="no" data-frameborder="0" data-allowTransparency="true"
-    data-width="700" data-height="350"></div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
 
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  -->
-<script src="assets/javascript/code.js"></script>
+    <div id="band-info"></div>
+    <div class="deezer-widget-player" data-scrolling="no" data-frameborder="0" data-allowTransparency="true"
+        data-width="700" data-height="350"></div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- Firebase References -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  -->
+    <script src="assets/javascript/code.js"></script>
 
 </html>
