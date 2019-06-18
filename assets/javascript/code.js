@@ -1,7 +1,7 @@
-$(".dropdown")
+// $(".dropdown")
 
-$( document ).ready(function){
-    $(".dropdown-trigger").dropdown({
-        hover:false
-    });
-}
+// $( document ).ready(function){
+//     $(".dropdown-trigger").dropdown({
+//         hover:false
+//     });
+// }
