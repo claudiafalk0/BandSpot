@@ -15,8 +15,14 @@ $(".input-group-append").on("click", ".dropdown-item", function () {
     console.log($(this).attr("data-album-id"));
     album_id = $(this).attr("data-album-id");
     $("#album_search_dropdown").empty();
+
     show_album();
-    $("#ticketBtn").show().css("display", "block")
+
+    $("#ticketBtn").show().css("display", "block");
+    $("#bio").empty();
+    artist();
+
+    $("#history").prepend();
 });
 
 $("#album_search_button").on("click", function () {
@@ -28,7 +34,7 @@ $("#album_search_button").on("click", function () {
         url: queryURL_Album_Search,
         async: false,
     }).then(function (response) {
-
+        console.log(response)
         var mydata = response.data;
         mydata.forEach(function (item) {
             var new_list_item = $("<div>");
@@ -38,13 +44,12 @@ $("#album_search_button").on("click", function () {
             $("#album_search_dropdown").append(new_list_item);
         });
     });
-    $("#album_search_dropdown").empty();
 });
 
 
 function show_album() {
 
-  var queryURL_Album = back_end_proxy + "https://api.deezer.com/album/" + album_id + "&api_key=" + api_key;
+    var queryURL_Album = back_end_proxy + "https://api.deezer.com/album/" + album_id + "&api_key=" + api_key;
 
     $.get({
         url: queryURL_Album,
@@ -98,6 +103,6 @@ function artist() {
             console.log(results)
             var values = results.split(" <").shift();
 
-            $("#bio").html(values)
+            $("#bio").text(values)
         });
 }
