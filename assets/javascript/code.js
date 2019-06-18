@@ -16,6 +16,7 @@ $(".input-group-append").on("click", ".dropdown-item", function () {
     album_id = $(this).attr("data-album-id");
     $("#album_search_dropdown").empty();
     show_album();
+    $("#ticketBtn").show().css("display", "block")
 });
 
 $("#album_search_button").on("click", function () {
@@ -36,7 +37,6 @@ $("#album_search_button").on("click", function () {
             new_list_item.text(item.title);
             $("#album_search_dropdown").append(new_list_item);
         });
-
     });
     $("#album_search_dropdown").empty();
 });
@@ -45,41 +45,6 @@ $("#album_search_button").on("click", function () {
 function show_album() {
 
   var queryURL_Album = back_end_proxy + "https://api.deezer.com/album/" + album_id + "&api_key=" + api_key;
-
-  $("#band-info").empty();
-
-  $.get({ url: queryURL_Album, }).then(function (response) {
-
-    $("#band-info").append("<br>" + response.artist.name + " - ");
-    $("#band-info").append(response.title + "<br><br>");
-
-    var album_cover = $("<img>");
-    album_cover.attr("src", response.cover_medium);
-    $("#band-info").append(album_cover);
-    $("#band-info").append("<br><br>");
-    $("#album_search_dropdown").empty();
-
-
-  });
-
-  var widget_album = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=album&id=" + album_id + "&app_id=353884";
-  $(".deezer-widget-player").attr("data-src", widget_album);
-
-  (function () {
-    var w = document[typeof document.getElementsByClassName === 'function' ? 'getElementsByClassName' : 'querySelectorAll']('deezer-widget-player');
-    for (var i = 0, l = w.length; i < l; i++) {
-      w[i].innerHTML = '';
-      var el = document.createElement('iframe');
-      el.src = w[i].getAttribute('data-src');
-      el.scrolling = w[i].getAttribute('data-scrolling');
-      el.frameBorder = w[i].getAttribute('data-frameborder');
-      el.setAttribute('frameBorder', w[i].getAttribute('data-frameborder'));
-      el.allowTransparency = w[i].getAttribute('data-allowTransparency');
-      el.width = w[i].getAttribute('data-width');
-      el.height = w[i].getAttribute('data-height');
-      w[i].appendChild(el);
-    }
-  }());
 
     $.get({
         url: queryURL_Album,

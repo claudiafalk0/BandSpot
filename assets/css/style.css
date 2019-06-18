@@ -42,7 +42,7 @@ body {
     text-align: center;
 }
 
-#favoriteSongs {
+#history {
     grid-column-start: 4;
     grid-column-end: 5;
     grid-row-start: 1;
@@ -147,4 +147,11 @@ body {
     grid-row-end: 1;
     text-align: center;
     align-self: center;
+}
+
+#ticketBtn{
+    text-decoration: none;
+    display: none;
+    color: black;
+    text-align: center;
 }
