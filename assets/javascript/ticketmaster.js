@@ -28,9 +28,7 @@ function geoLocate(){
             console.log(response);
             for(var i = 0; i < response._embedded.events.length; i++){
                 var results = response._embedded.events[i];
-                var venue = i + 1
-                var newDiv = $("<div>");
-                var h1 = $("<h1>").text("Venue " + venue);
+                var name = results.name;
                 var time =  results.dates.start.localTime;
                 var timePretty = moment(time, "HH:mm").format("h:mm A");
                 var date = results.dates.start.localDate;
@@ -38,32 +36,80 @@ function geoLocate(){
                 var address = results._embedded.venues[0].address.line1;
                 var city = results._embedded.venues[0].city.name;
                 var state = results._embedded.venues[0].state.stateCode;
-                var objArr = [{
 
-                    Date: date,
-                    Time: timePretty,
-                    Venue_Name: venueName,
-                    Venue_Address: address,
-                    Venue_City: city,
-                    Venue_State: state
-                }];
 
                 var newRow = $("<tr>").append(
-                    $("<td>").text(objArr.Date),
-                    $("<td>").text(objArr.Time),
-                    $("<td>").text(ObjArr.Venue_Name),
-                    $("<td>").text(ObjArr.Venue_Address),
-                    $("<td>").text(ObjArr.Venue_City),
-                    $("<td>").text(ObjArr.Venue_State)
+                    $("<td>").text(name),
+                    $("<td>").text(date),
+                    $("<td>").text(timePretty),
+                    $("<td>").text(venueName),
+                    $("<td>").text(address),
+                    $("<td>").text(city),
+                    $("<td>").text(state)
                     );
                     
                     // Append the new row to the table
                     $("tbody").append(newRow);
-                    newDiv.append(h1);
-                    $(".ticketMaster").append(newDiv);
+                
                 }
 
 
             
         })
     }
+    // POST /tm-3pi-api/v1/bookings HTTP/1.1
+    // Host: partner.com
+    // X-Target-URI: https://partner.com
+    // Connection: Keep-Alive
+    
+    // {
+    //   "language": "es-es",
+    //   "channel_info": {
+    //     "channel_type": "OUTLET",
+    //     "subChannelName": "FNACV ZGZ.ESPA�A"  },
+    //   "event_id": "event_3p",
+    //   "last_modification": "2018-07-19T07:15:12Z",
+    //   "searches": [
+    //     {
+    //       "index": "1",
+    //       "accept_alternate": [],
+    //       "search_type": "BESTAVAIL",
+    //       "bestavail": {
+    //         "areas": [],
+    //         "price_level_ids": [],
+    //         "price_types": [
+    //           {
+    //             "id": "price_type_3p",
+    //             "quantity": "2"
+    //           }
+    //         ]
+    //       },
+    //     },
+    //     {
+    //       "index": "2",
+    //       "accept_non_adjacent": false,
+    //       "accept_alternate": [],
+    //       "search_type": "SPECIFIC",
+    //       "specific": {
+    //         "tickets": [
+    //           {
+    //             "price_level_id": "price_level_3p_1",
+    //             "price_type_id": "price_type_3p",
+    //             "level": "L1_3p",
+    //             "section": "202_3p",
+    //             "row": "3p_R1",
+    //             "seat": "3p_3"
+    //           },
+    //           {
+    //             "price_level_id": "price_level_3p_1",
+    //             "price_type_id": "price_type_3p",
+    //             "level": "L1_3p",
+    //             "section": "202_3p",
+    //             "row": "3p_R1",
+    //             "seat": "3p_4"
+    //           }
+    //         ]
+    //       }
+    //     }
+    //   ]
+    // }
