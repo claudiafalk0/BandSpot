@@ -166,3 +166,13 @@ header{
     grid-row-start: 1;
     grid-row-end: 1;
 }
+
+#ticket-button{
+    color: white;
+    text-decoration: none;
+    display: block
+}
+
+#ticket-button:visited{
+    color:pink;
+}
