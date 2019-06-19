@@ -82,7 +82,6 @@ $("#album_search_button").on("click", function () {
     $.get({ url: queryURL_Album_Search, }).then(function (response) {
       var album_ids = [];
       var album_titles = [];
-      // console.log(response);
       var mydata = response.data;
       mydata.forEach(function (item, i) {
         // need to pass on mulitple listings of same album
@@ -110,7 +109,6 @@ database.ref().on("child_added", function (snapshot) {
     cover: snapshot.val().cover,
     id: snapshot.val().id
   }
-  // console.log(album);
   var new_list_item = $("<div>");
   new_list_item.addClass("dropdown-item");
   new_list_item.attr("data-album-id", album.id);
@@ -127,7 +125,7 @@ function reset_viewed_list_dropdown() {
   $("#viewed_list_dropdown").empty();
   var ref = firebase.database().ref();
   ref.once("value", snapshot => {
-    
+
     const userData = snapshot.val();
     snapshot.forEach(function (childSnapshot) {
 
