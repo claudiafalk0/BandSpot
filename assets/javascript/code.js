@@ -145,6 +145,9 @@ function bio_display(name) {
 
             $("#bio").text(values);
         });
+    if(name === "Various Artists"){
+        $("#bio").hide();
+    }
 }
 
 //add to list of viewed albums dropdown upon push to firebase
