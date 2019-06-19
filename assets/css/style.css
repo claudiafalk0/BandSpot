@@ -5,7 +5,19 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     height: 300vh;
-    font-family: Arial, Helvetica, sans-serif
+    font-family: 'Permanent Marker', cursive;
+}
+
+
+.mainmenubtn {
+    background: darkgray;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    width: 160px;
+    border-radius: 1em;
+    padding: 2.5px 0px;
 }
 
 #clear_list_button{
@@ -13,10 +25,8 @@ body {
     grid-column-end: 7;
     grid-row-start: 1;
     width: 160px;
-    height: 21px;
     font-size: 15px;
-    align-self: center;
-    text-align: center;
+    
 }
 
 #delete_item_button{
@@ -24,10 +34,7 @@ body {
     grid-column-end: 8;
     grid-row-start: 1;
     width: 160px;
-    height: 21px;
     font-size: 15px;
-    align-self: center;
-    text-align: center;
 }
 
 table{
@@ -45,14 +52,16 @@ header{
 #album_search_button{
     border-radius: 1em;
     background: darkgray;
-    width: 160px;;
-    height: 21px;
+    width: 160px;
     font-size: 15px;
 }
 
 button{
     background: darkgray;
     border-radius: 1em;
+    font-family: 'Permanent Marker', cursive;
+    align-self: center;
+    text-align: center;
 }
 
 #Image {
@@ -76,6 +85,8 @@ button{
     color: black;
     border-radius: 1em;
     width: auto;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 15px;
 }
 
 ::placeholder{
@@ -108,16 +119,6 @@ button{
     grid-row-start: 1;
     align-self: center;
     text-align: center;
-}
-
-.mainmenubtn {
-    background: darkgray;
-    color: black;
-    border: none;
-    cursor: pointer;
-    font-size: 15px;
-    width: 10em;
-    border-radius: 1em;
 }
 
 .dropdown {
@@ -191,7 +192,7 @@ button{
 
 #widgetPlacement {
     display: grid;
-    grid-template-columns:1em 37.5em 5em 50em 1em;
+    grid-template-columns:1em 37.5em 5em 45em;
     grid-template-rows: 3em auto;
 }
 
@@ -233,4 +234,9 @@ button{
 
 td{
     padding: 0em 1em;
+    font-family: 'Permanent Marker', cursive;
+}
+
+th{
+    font-family: 'Permanent Marker', cursive;
 }
