@@ -113,9 +113,6 @@ $("#album_search_button").on("click", function () {
   }
 });
 
-var summary_api_key = "4449581c4e4db7c380fae2d8fd50142d";
-var summary_method = "artist.getinfo";
-var summaryURL = "http://ws.audioscrobbler.com/2.0/?method=" + summary_method + "&api_key=" + summary_api_key + "&format=json&autocorrect=1";
 
 // $("#album_search_text").on("keyup", function () {
 // $("#album_search_dropdown").empty();
@@ -123,7 +120,13 @@ var summaryURL = "http://ws.audioscrobbler.com/2.0/?method=" + summary_method + 
 
 
 
-function artist(summaryURL) {
+function bio_display(name) {
+
+var summary_api_key = "4449581c4e4db7c380fae2d8fd50142d";
+var summary_method = "artist.getinfo";
+var summaryURL = "http://ws.audioscrobbler.com/2.0/?method=" + summary_method + "&api_key=" + summary_api_key + "&format=json&autocorrect=1&artist=" + name;
+
+
   $.ajax({
     url: summaryURL,
     method: "GET",
@@ -243,9 +246,8 @@ function show_album(album_id) {
     album_cover.attr("src", album.cover);
     $("#artistImage").html(album_cover);
 
-    var artistBio = "&artist=" + album.artist;
-    summaryURL += artistBio;
-    artist(summaryURL);
+    console.log("artist = ", album.artist)
+    bio_display(album.artist);
 
     if (!check_exists(album))
       database.ref().push(album);
