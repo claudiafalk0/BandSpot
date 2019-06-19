@@ -33,6 +33,10 @@ function clear_current_album() {
   };
 }
 
+$("#album_search_text").on("keyup", function () {
+  event.preventDefault();
+  $("#album_search_dropdown").empty();
+});
 
 // clear viewed list
 $("#clear_list_button").on("click", function () {
@@ -65,7 +69,7 @@ $("#album_search_dropdown").on("click", ".dropdown-item", function () {
   console.log("this: ", this);
   console.log("2:", album_id);
   $("#album_search_dropdown").empty();
-  $(".ticketMaster").show().css("display", "block")
+  // $(".ticketMaster").show().css("display", "block")
   show_album(album_id);
 });
 
@@ -79,6 +83,7 @@ $("#viewed_list_dropdown").on("click", ".dropdown-item", function () {
   $(".ticketMaster").show().css("display", "block")
   show_album(album_id);
 });
+
 
 // album search dropdown click - get text from input - get albums info from deezer - repopulate dropdown
 $("#album_search_button").on("click", function () {
@@ -114,17 +119,13 @@ $("#album_search_button").on("click", function () {
 });
 
 
-// $("#album_search_text").on("keyup", function () {
-// $("#album_search_dropdown").empty();
-// });
-
 
 
 function bio_display(name) {
 
-var summary_api_key = "4449581c4e4db7c380fae2d8fd50142d";
-var summary_method = "artist.getinfo";
-var summaryURL = "http://ws.audioscrobbler.com/2.0/?method=" + summary_method + "&api_key=" + summary_api_key + "&format=json&autocorrect=1&artist=" + name;
+  var summary_api_key = "4449581c4e4db7c380fae2d8fd50142d";
+  var summary_method = "artist.getinfo";
+  var summaryURL = "http://ws.audioscrobbler.com/2.0/?method=" + summary_method + "&api_key=" + summary_api_key + "&format=json&autocorrect=1&artist=" + name;
 
 
   $.ajax({
@@ -143,7 +144,6 @@ var summaryURL = "http://ws.audioscrobbler.com/2.0/?method=" + summary_method + 
 //add to list of viewed albums dropdown upon push to firebase
 database.ref().on("child_added", function (snapshot) {
 
-  console.log("add_child");
 
   var album = {
     artist: snapshot.val().artist,
@@ -222,15 +222,12 @@ function delete_firebase_element(album_id) {
 // take album id - get info from deezer and put up song play widget
 function show_album(album_id) {
 
-  // $("#musicInfo").empty();
-  // $("#widgetPlacement").empty();
-
   console.log("albumid = ", album_id);
 
   var queryURL_Album = back_end_proxy + "https://api.deezer.com/album/" + album_id + "&api_key=" + deezer_api_key;
   // var queryURL_Album_Search = back_end_proxy + "https://api.deezer.com/search?q=album:" + album_search_str + "&api_key=" + deezer_api_key;
 
-  $.get({ url: queryURL_Album}).then(function (response) {
+  $.get({ url: queryURL_Album }).then(function (response) {
     console.log("Here:", response)
 
     var album = {
@@ -246,7 +243,6 @@ function show_album(album_id) {
     album_cover.attr("src", album.cover);
     $("#artistImage").html(album_cover);
 
-    console.log("artist = ", album.artist)
     bio_display(album.artist);
 
     if (!check_exists(album))
@@ -254,13 +250,11 @@ function show_album(album_id) {
 
     current_album = album;
 
-    // $("#band-info").append("<br>" + album.artist + " - ");
-    // $("#band-info").append(album.title + "<br><br>");
+    $(".ticketMaster").show().css("display", "block");
 
-    // var $cover_img = $("<img>");
-    // $cover_img.attr("src", album.cover);
-    // $("#band-info").append($cover_img);
-    // $("#band-info").append("<br><br>");
+    console.log("artist = ", album.artist)
+    geoLocate(album.artist);
+
   });
 
 
@@ -285,3 +279,69 @@ function show_album(album_id) {
   }());
 }
 
+//   var searchBar = MichaelBuble
+//  var artist = "Pink"
+
+
+
+function geoLocate(name) {
+  console.log("name1 = ", name);
+  var clean_name = name.split(" ").join("+");
+  console.log("cleanname = ", clean_name);
+
+  var URL = "https://api.ipdata.co?api-key=3ab511acf8369181d1c468336c2a91788e4f23d06e8cfc42529766e0"
+  var tm_queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + clean_name + "&apikey=zGbsNtFCffL494M49bvVQPFa988Pp0V3";
+  var differ = "";
+
+  $.ajax({
+    method: 'GET',
+    url: URL,
+    async: false
+  }).then(function (response) {
+    console.log("1: ", response);
+    differ = response.region_code;
+    tm_queryURL += "&stateCode=" + differ;
+    console.log("queryURL" + tm_queryURL);
+    getEvents(tm_queryURL);
+  });
+};
+
+//  geoLocate()
+// console.log("Outside geoLocate =" + differ);
+
+function getEvents(queryURL) {
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function (response) {
+    console.log("2: ", response);
+    for (var i = 0; i < response._embedded.events.length; i++) {
+      var results = response._embedded.events[i];
+      var name = results.name;
+      var time = results.dates.start.localTime;
+      var timePretty = moment(time, "HH:mm").format("h:mm A");
+      var date = results.dates.start.localDate;
+      var venueName = results._embedded.venues[0].name;
+      var address = results._embedded.venues[0].address.line1;
+      var city = results._embedded.venues[0].city.name;
+      var state = results._embedded.venues[0].state.stateCode;
+      var tickets = results.url;
+
+      console.log("tickets: ", tickets);
+
+      var newRow = $("<tr>").append(
+        $("<td>").text(name),
+        $("<td>").text(date),
+        $("<td>").text(timePretty),
+        $("<td>").text(venueName),
+        $("<td>").text(address),
+        $("<td>").text(city),
+        $("<td>").text(state),
+        $("<td>").html("<a target = _blank input href =" + tickets + ">Get tickets</a>")
+      );
+      console.log(tickets)
+      // Append the new row to the table
+      $("tbody").append(newRow);
+    }
+  })
+}
