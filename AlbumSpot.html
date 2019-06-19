@@ -27,9 +27,6 @@
 
 <body>
   <header>
-    <button id="clear_list_button" type="button">Clear viewed list</button>
-    <button id="delete_item_button" type="button">Delete current album from viewed list</button>
-
     <div id="navBar">
 
       <input id="album_search_text" type="text" class="form-control" aria-label="Text input with dropdown button"
@@ -45,7 +42,9 @@
         AlbumSpot
       </div>
 
-
+      <button id="clear_list_button" type="button">Clear viewed list</button>
+      <button id="delete_item_button" type="button">Delete current album</button>
+      
       <div class="dropdown" id="history">
         <button class="mainmenubtn">Previously Viewed</button>
         <div id="viewed_list_dropdown" class="dropdown-child">
@@ -84,9 +83,6 @@
             <th scope="col">Date</th>
             <th scope="col">Time</th>
             <th scope="col">Venue Name</th>
-            <th scope="col">Address</th>
-            <th scope="col">City</th>
-            <th scope="col">State</th>
           </tr>
         </thead>
         <tbody>
