@@ -68,8 +68,6 @@ $("#delete_item_button").on("click", function () {
 $("#album_search_dropdown").on("click", ".dropdown-item", function () {
     event.preventDefault();
     var album_id = $(this).attr("data-album-id");
-    console.log("this: ", this);
-    console.log("2:", album_id);
     $("#album_search_dropdown").empty();
     $("td").empty();
     show_album(album_id);
@@ -80,8 +78,6 @@ $("#viewed_list_dropdown").on("click", ".dropdown-item", function () {
     event.preventDefault();
 
     var album_id = $(this).attr("data-album-id");
-    console.log("this_viewd: ", this);
-    console.log("2-viewed:", album_id);
     $("td").empty();
     $(".ticketMaster").show().css("display", "block")
     show_album(album_id);
@@ -93,7 +89,6 @@ $("#album_search_button").on("click", function () {
 
     event.preventDefault();
     var album_search_str = $("#album_search_text").val().trim();
-    console.log("str = " + album_search_str);
 
 
     if (album_search_str != "") {
@@ -290,15 +285,11 @@ function show_album(album_id) {
     }());
 }
 
-//   var searchBar = MichaelBuble
-//  var artist = "Pink"
 
 
 
 function geoLocate(name) {
-    console.log("name1 = ", name);
     var clean_name = name.split(" ").join("+");
-    console.log("cleanname = ", clean_name);
 
     var URL = "https://api.ipdata.co?api-key=3ab511acf8369181d1c468336c2a91788e4f23d06e8cfc42529766e0"
     var tm_queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + clean_name + "&apikey=zGbsNtFCffL494M49bvVQPFa988Pp0V3";
@@ -309,27 +300,21 @@ function geoLocate(name) {
         url: URL,
         async: false
     }).then(function (response) {
-        console.log("1: ", response);
         differ = response.region_code;
         tm_queryURL += "&stateCode=" + differ;
-        console.log("queryURL" + tm_queryURL);
         getEvents(tm_queryURL);
     });
 };
 
-//  geoLocate()
-// console.log("Outside geoLocate =" + differ);
 
 function getEvents(queryURL) {
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log("2: ", response);
         $("#no_events").hide();
         if (!response._embedded) {
             $(".ticketMaster").hide();
-            console.log("yoo")
             $("#no_events").text("No local events found. :(").show();
         } else {    
 
@@ -344,7 +329,6 @@ function getEvents(queryURL) {
 
                 $(".ticketMaster").show().css("display", "block");
 
-                console.log("tickets: ", tickets);
 
                 var newRow = $("<tr>").append(
                     $("<td>").text(name),
@@ -353,7 +337,6 @@ function getEvents(queryURL) {
                     $("<td>").text(venueName),
                     $("<td>").html("<a id='ticket-button' target = _blank input href =" + tickets + ">Get tickets</a>")
                 );
-                console.log(tickets)
                 // Append the new row to the table
                 $("tbody").append(newRow);
             }
