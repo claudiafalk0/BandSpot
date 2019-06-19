@@ -126,10 +126,10 @@ function reset_viewed_list_dropdown() {
 
   $("#viewed_list_dropdown").empty();
   var ref = firebase.database().ref();
-  ref.orderByChild("id").once("value", snapshot => {
+  ref.once("value", snapshot => {
+    
     const userData = snapshot.val();
     snapshot.forEach(function (childSnapshot) {
-      // var childData = childSnapshot.val();
 
       var album = {
         artist: childSnapshot.val().artist,
@@ -137,7 +137,6 @@ function reset_viewed_list_dropdown() {
         cover: childSnapshot.val().cover,
         id: childSnapshot.val().id
       }
-      // console.log(album);
       var new_list_item = $("<div>");
       new_list_item.addClass("dropdown-item");
       new_list_item.attr("data-album-id", album.id);
@@ -150,7 +149,6 @@ function reset_viewed_list_dropdown() {
 function check_exists(album) {
 
   var exists = false;
-  console.log("in here");
 
   var ref = firebase.database().ref();
   ref.orderByChild("title").equalTo(album.title).once("value", snapshot => {
@@ -158,7 +156,6 @@ function check_exists(album) {
     snapshot.forEach(function (childSnapshot) {
       var childData = childSnapshot.val();
       if (userData && childData.title === album.title) {
-        console.log("exists!");
         exists = true;
       }
     })
@@ -172,13 +169,10 @@ function check_exists(album) {
 function delete_firebase_element(album_id) {
 
   var ref = firebase.database().ref();
-  ref.orderByChild("id").equalTo(album_id).once("value", snapshot => {
-    const userData = snapshot.val();
+  ref.once("value", snapshot => {
     snapshot.forEach(function (childSnapshot) {
-      var childData = childSnapshot.val();
-      if (userData && childData.id === album_id) {
+      if (snapshot.val() && childSnapshot.val().id === album_id) {
         ref.child(childSnapshot.key).remove();
-        console.log("found");
       }
     })
   })
