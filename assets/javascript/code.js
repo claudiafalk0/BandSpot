@@ -19,25 +19,40 @@ var database = firebase.database();
 var api_key = "6f4d1eb22866cf66982fcd2dcbcdce2b"
 var back_end_proxy = "https://cors-anywhere.herokuapp.com/";
 
-// var current_album = {
-//   artist: "",
-//   title: "",
-//   cover: "",
-//   id: 0
-// };
+var current_album = {
+  artist: "",
+  title: "",
+  cover: "",
+  id: 0
+};
 
-$("#album_search_text").on("keyup", function () {
-  event.preventDefault();
-  $("#album_search_dropdown").empty();
+function clear_current_album() {
+  current_album = {
+    artist: "",
+    title: "",
+    cover: "",
+    id: 0
+  };
+}
+
+
+// clear viewed list
+$("#clear_list_button").on("click", function () {
+  database.ref().remove();
+  $("#viewed_list_dropdown").empty();
+  $("#band-info").empty();
+  $(".deezer-widget-player").empty();
+  clear_current_album();
 });
 
-// $("#delete_button").on("click", function () {
-//   // database.ref.child(key).remove();
-//   delete_fb_element($(this));
-//   alert("delete");
-// });
-  // delete_fb_element($(this).attr("data-album-id"));
-
+// delete current album from viewed list button
+$("#delete_item_button").on("click", function () {
+  delete_firebase_element(current_album.id);
+  $("#band-info").empty();
+  $(".deezer-widget-player").empty();
+  reset_viewed_list_dropdown();
+  clear_current_album();
+});
 
 // choose album from album search dropdown
 $("#alist").on("click", ".dropdown-item", function () {
@@ -107,6 +122,31 @@ database.ref().on("child_added", function (snapshot) {
 });
 
 
+function reset_viewed_list_dropdown() {
+
+  $("#viewed_list_dropdown").empty();
+  var ref = firebase.database().ref();
+  ref.orderByChild("id").once("value", snapshot => {
+    const userData = snapshot.val();
+    snapshot.forEach(function (childSnapshot) {
+      // var childData = childSnapshot.val();
+
+      var album = {
+        artist: childSnapshot.val().artist,
+        title: childSnapshot.val().title,
+        cover: childSnapshot.val().cover,
+        id: childSnapshot.val().id
+      }
+      // console.log(album);
+      var new_list_item = $("<div>");
+      new_list_item.addClass("dropdown-item");
+      new_list_item.attr("data-album-id", album.id);
+      new_list_item.text(album.artist + " : " + album.title);
+      $("#viewed_list_dropdown").append(new_list_item);
+    })
+  })
+}
+
 function check_exists(album) {
 
   var exists = false;
@@ -124,9 +164,9 @@ function check_exists(album) {
     })
   })
   if (exists)
-    return(true);
+    return (true);
   else
-    return(false);
+    return (false);
 }
 
 function delete_firebase_element(album_id) {
@@ -136,9 +176,9 @@ function delete_firebase_element(album_id) {
     const userData = snapshot.val();
     snapshot.forEach(function (childSnapshot) {
       var childData = childSnapshot.val();
-      if (userData && childData.id === album-id) {
-        childData.remove();
-        console.log("exists!");
+      if (userData && childData.id === album_id) {
+        ref.child(childSnapshot.key).remove();
+        console.log("found");
       }
     })
   })
@@ -148,48 +188,52 @@ function delete_firebase_element(album_id) {
 // take album id - get info from deezer and put up song play widget
 function show_album(album_id) {
 
-      var queryURL_Album = back_end_proxy + "https://api.deezer.com/album/" + album_id + "&api_key=" + api_key;
+  var queryURL_Album = back_end_proxy + "https://api.deezer.com/album/" + album_id + "&api_key=" + api_key;
 
-      $("#band-info").empty();
-      $.get({ url: queryURL_Album, }).then(function (response) {
+  $("#band-info").empty();
+  $.get({ url: queryURL_Album, }).then(function (response) {
 
-        var album = {
-          artist: response.artist.name,
-          title: response.title,
-          cover: response.cover_medium,
-          id: album_id
-        }        
-
-        if (!check_exists(album))
-          database.ref().push(album);
-        
-        $("#band-info").append("<br>" + album.artist + " - ");
-        $("#band-info").append(album.title + "<br><br>");
-
-        var $cover_img = $("<img>");
-        $cover_img.attr("src", album.cover);
-        $("#band-info").append($cover_img);
-        $("#band-info").append("<br><br>");
-      });
-
-      var widget_album = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=album&id=" + album_id + "&app_id=353884";
-      $(".deezer-widget-player").attr("data-src", widget_album);
-
-      (function () {
-        var w = document[typeof document.getElementsByClassName === 'function' ? 'getElementsByClassName' : 'querySelectorAll']('deezer-widget-player');
-        for (var i = 0, l = w.length; i < l; i++) {
-          w[i].innerHTML = '';
-          var el = document.createElement('iframe');
-          el.src = w[i].getAttribute('data-src');
-          el.scrolling = w[i].getAttribute('data-scrolling');
-          el.frameBorder = w[i].getAttribute('data-frameborder');
-          el.setAttribute('frameBorder', w[i].getAttribute('data-frameborder'));
-          el.allowTransparency = w[i].getAttribute('data-allowTransparency');
-          el.width = w[i].getAttribute('data-width');
-          el.height = w[i].getAttribute('data-height');
-          w[i].appendChild(el);
-        }
-      }());
-
+    var album = {
+      artist: response.artist.name,
+      title: response.title,
+      cover: response.cover_medium,
+      id: album_id
     }
+
+    if (!check_exists(album))
+      database.ref().push(album);
+
+    current_album = album;
+
+    $("#band-info").append("<br>" + album.artist + " - ");
+    $("#band-info").append(album.title + "<br><br>");
+
+    var $cover_img = $("<img>");
+    $cover_img.attr("src", album.cover);
+    $("#band-info").append($cover_img);
+    $("#band-info").append("<br><br>");
+  });
+
+
+  // show  deezer widget for current album
+  var widget_album = "https://www.deezer.com/plugins/player?format=classic&autoplay=false&playlist=true&width=700&height=350&color=ff0000&layout=dark&size=medium&type=album&id=" + album_id + "&app_id=353884";
+  $(".deezer-widget-player").attr("data-src", widget_album);
+
+  (function () {
+    var w = document[typeof document.getElementsByClassName === 'function' ? 'getElementsByClassName' : 'querySelectorAll']('deezer-widget-player');
+    for (var i = 0, l = w.length; i < l; i++) {
+      w[i].innerHTML = '';
+      var el = document.createElement('iframe');
+      el.src = w[i].getAttribute('data-src');
+      el.scrolling = w[i].getAttribute('data-scrolling');
+      el.frameBorder = w[i].getAttribute('data-frameborder');
+      el.setAttribute('frameBorder', w[i].getAttribute('data-frameborder'));
+      el.allowTransparency = w[i].getAttribute('data-allowTransparency');
+      el.width = w[i].getAttribute('data-width');
+      el.height = w[i].getAttribute('data-height');
+      w[i].appendChild(el);
+    }
+  }());
+
+}
 
