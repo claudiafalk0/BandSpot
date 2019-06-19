@@ -1,14 +1,47 @@
 body {
+    background: darkgrey;
     color: white;
     background-image: url(https://github.com/claudiafalk0/BandSpot/blob/Claudia/assets/images/concert-red.jpg?raw=true);
     background-repeat: no-repeat;
     background-size: cover;
     height: 300vh;
-    font-family: Arial, Helvetica, sans-serif
+    font-family: 'Permanent Marker', cursive;
 }
 
-input{
-    border-radius: 2px;
+
+.mainmenubtn {
+    background: darkgray;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    width: 160px;
+    border-radius: 1em;
+    padding: 2.5px 0px;
+}
+
+#clear_list_button{
+    grid-column-start: 6;
+    grid-column-end: 7;
+    grid-row-start: 1;
+    width: 160px;
+    font-size: 15px;
+    
+}
+
+#delete_item_button{
+    grid-column-start: 7;
+    grid-column-end: 8;
+    grid-row-start: 1;
+    width: 160px;
+    font-size: 15px;
+}
+
+table{
+    display: none;
+    text-align: center;
+    
+    width: auto;
 }
 
 header{
@@ -17,8 +50,18 @@ header{
 }
 
 #album_search_button{
-    width: 10em;
     border-radius: 1em;
+    background: darkgray;
+    width: 160px;
+    font-size: 15px;
+}
+
+button{
+    background: darkgray;
+    border-radius: 1em;
+    font-family: 'Permanent Marker', cursive;
+    align-self: center;
+    text-align: center;
 }
 
 #Image {
@@ -27,7 +70,7 @@ header{
 
 #navBar {
     display: grid;
-    grid-template-columns: 12em 12em auto 12em 12em;
+    grid-template-columns: 12em 12em 12em auto 12em 12em 12em;
     grid-template-rows: 3em;
 }
 
@@ -37,8 +80,17 @@ header{
     grid-row-start: 1;
     align-self: center;
     text-align: center;
-    background-color: whitesmoke;
-    height: 1.36em;
+    background: darkgray;
+    height: 21px;
+    color: black;
+    border-radius: 1em;
+    width: auto;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 15px;
+}
+
+::placeholder{
+    color: black;
 }
 
 .input-group-append {
@@ -54,14 +106,6 @@ header{
     font-family: 'Rock Salt', cursive;
     color: yellow;
     font-size: 2em;
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    align-self: center;
-    text-align: center;
-}
-
-#history {
     grid-column-start: 4;
     grid-column-end: 5;
     grid-row-start: 1;
@@ -69,22 +113,12 @@ header{
     text-align: center;
 }
 
-/* 
-#favoriteArtists {
+#history {
     grid-column-start: 5;
     grid-column-end: 6;
     grid-row-start: 1;
-    grid-row-start: 1;
     align-self: center;
     text-align: center;
-} */
-
-.mainmenubtn {
-    background-color: whitesmoke;;
-    color: black;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
 }
 
 .dropdown {
@@ -100,18 +134,18 @@ header{
 .dropdown-child,
 #album_search_dropdown {
     position: absolute;
-    min-width: 9em;
+    min-width: 23em;
     max-height: 2em;
     /* box-shadow: 0em 1em 2em 0em rgba(0, 0, 0, 0.2); */
     padding: .5em;
     z-index: 1;
-    background: transparent;
 }
 
 .dropdown-child a {
     color: white;
     text-decoration: none;
-    display: block
+    display: block;
+    background: whitesmoke;
 }
 
 .dropdown:hover .dropdown-child {
@@ -127,8 +161,8 @@ header{
 #musicInfo {
     display: grid;
     grid-template-columns: 5em 15em 2em auto 2em 20em;
-    grid-template-rows: 5em 10em auto 10em;
-    padding-top: 4em;
+    grid-template-rows: 5em 10em auto 5em;
+    padding-top: 5em;
 }
 
 #artistName {
@@ -158,21 +192,51 @@ header{
 
 #widgetPlacement {
     display: grid;
-    grid-template-columns:1em 37.5em auto 1em;
-    grid-template-rows: auto;
+    grid-template-columns:1em 37.5em 5em 45em;
+    grid-template-rows: 3em auto;
 }
 
 #widget {
     grid-column-start: 2;
     grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 1;
+    grid-row-start: 2;
 }
 
 .ticketMaster {
     display: none;
-    grid-column-start: 3;
-    grid-column-end: 4;
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 2;
+}
+
+#no_events{
+    grid-column-start: 4;
+    grid-column-end: 5;
     grid-row-start: 1;
-    grid-row-end: 1;
+    font-size: 1.5em;
+}
+
+#ticket-button{
+    color: white;
+    text-decoration: none;
+    display: block
+}
+
+#ticket-button:visited{
+    color:pink;
+}
+
+.dropdown-item {
+    padding: .2em 0em;
+    background: rgb(211,211,211,.9);
+    color: black;
+}
+
+td{
+    padding: 0em 1em;
+    font-family: 'Permanent Marker', cursive;
+}
+
+th{
+    font-family: 'Permanent Marker', cursive;
 }
