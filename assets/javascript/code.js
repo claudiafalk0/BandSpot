@@ -1,5 +1,5 @@
 // Deedzer api key 6f4d1eb22866cf66982fcd2dcbcdce2b
-var artist = "";
+var aName = "";
 var api_key = "6f4d1eb22866cf66982fcd2dcbcdce2b"
 var back_end_proxy = "https://cors-anywhere.herokuapp.com/";
 var album_id = "";
@@ -7,7 +7,7 @@ var summary_api_key = "4449581c4e4db7c380fae2d8fd50142d"
 var summary_method = "artist.getinfo"
 var summaryURL = "http://ws.audioscrobbler.com/2.0/?method=" + summary_method + "&artist=" + artist + "&api_key=" + summary_api_key + "&format=json&autocorrect=1";
 var URL = "https://api.ipdata.co?api-key=3ab511acf8369181d1c468336c2a91788e4f23d06e8cfc42529766e0"
-var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + artist + "&apikey=zGbsNtFCffL494M49bvVQPFa988Pp0V3";
+var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + aName + "&apikey=zGbsNtFCffL494M49bvVQPFa988Pp0V3";
 var differ = ""
 
 
@@ -82,9 +82,8 @@ function show_album(queryURL_Album) {
         album_cover.attr("src", response.cover_medium);
         $("#artistImage").html(album_cover);
 
-        // var artistBio = "&artist=" + artistName;
-        // summaryURL += artistBio;
-        // console.log(artistBio)
+        aName = artistName;
+        // console.log(artist)
         // console.log(summaryURL)
         artist(summaryURL);
     });

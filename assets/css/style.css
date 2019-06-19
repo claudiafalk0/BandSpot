@@ -148,7 +148,7 @@ header{
 
 #widgetPlacement {
     display: grid;
-    grid-template-columns:1em 37.5em auto 1em;
+    grid-template-columns:1em 37.5em 1em auto 1em;
     grid-template-rows: auto;
 }
 
@@ -161,8 +161,8 @@ header{
 
 .ticketMaster {
     display: none;
-    grid-column-start: 3;
-    grid-column-end: 4;
+    grid-column-start: 4;
+    grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 1;
 }
