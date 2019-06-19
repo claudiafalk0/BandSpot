@@ -147,6 +147,8 @@ function bio_display(name) {
         });
     if(name === "Various Artists"){
         $("#bio").hide();
+    }else{
+        $("#bio").show();
     }
 }
 
@@ -338,9 +340,6 @@ function getEvents(queryURL) {
                 var timePretty = moment(time, "HH:mm").format("h:mm A");
                 var date = results.dates.start.localDate;
                 var venueName = results._embedded.venues[0].name;
-                var address = results._embedded.venues[0].address.line1;
-                var city = results._embedded.venues[0].city.name;
-                var state = results._embedded.venues[0].state.stateCode;
                 var tickets = results.url;
 
                 $(".ticketMaster").show().css("display", "block");
@@ -352,9 +351,6 @@ function getEvents(queryURL) {
                     $("<td>").text(date),
                     $("<td>").text(timePretty),
                     $("<td>").text(venueName),
-                    $("<td>").text(address),
-                    $("<td>").text(city),
-                    $("<td>").text(state),
                     $("<td>").html("<a id='ticket-button' target = _blank input href =" + tickets + ">Get tickets</a>")
                 );
                 console.log(tickets)
