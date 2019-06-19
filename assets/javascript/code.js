@@ -1,5 +1,3 @@
-
-
 // Deedzer api key 6f4d1eb22866cf66982fcd2dcbcdce2b
 
 var firebaseConfig = {
@@ -16,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-var api_key = "6f4d1eb22866cf66982fcd2dcbcdce2b"
+var deezer_api_key = "6f4d1eb22866cf66982fcd2dcbcdce2b"
 var back_end_proxy = "https://cors-anywhere.herokuapp.com/";
 
 var current_album = {
@@ -40,32 +38,45 @@ function clear_current_album() {
 $("#clear_list_button").on("click", function () {
   database.ref().remove();
   $("#viewed_list_dropdown").empty();
-  $("#band-info").empty();
+  $("#artistName").empty();
+  $("#artistImage").empty();
+  $("#bio").empty();
   $(".deezer-widget-player").empty();
+  $(".ticketMaster").empty();
   clear_current_album();
 });
 
 // delete current album from viewed list button
 $("#delete_item_button").on("click", function () {
   delete_firebase_element(current_album.id);
-  $("#band-info").empty();
+  $("#artistName").empty();
+  $("#artistImage").empty();
+  $("#bio").empty();
   $(".deezer-widget-player").empty();
+  $(".ticketMaster").empty();
   reset_viewed_list_dropdown();
   clear_current_album();
 });
 
-// choose album from album search dropdown
-$("#alist").on("click", ".dropdown-item", function () {
+// choose album from album search dropdown prev #alist"
+$("#album_search_dropdown").on("click", ".dropdown-item", function () {
   event.preventDefault();
   var album_id = $(this).attr("data-album-id");
+  console.log("this: ", this);
+  console.log("2:", album_id);
   $("#album_search_dropdown").empty();
+  $(".ticketMaster").show().css("display", "block")
   show_album(album_id);
 });
 
-// choose album from viewed list dropdown
-$("#vlist").on("click", ".dropdown-item", function () {
+// choose album from viewed list dropdown prev #vlist
+$("#viewed_list_dropdown").on("click", ".dropdown-item", function () {
   event.preventDefault();
   var album_id = $(this).attr("data-album-id");
+  console.log("this_viewd: ", this);
+  console.log("2-viewed:", album_id);
+
+  $(".ticketMaster").show().css("display", "block")
   show_album(album_id);
 });
 
@@ -74,20 +85,23 @@ $("#album_search_button").on("click", function () {
 
   event.preventDefault();
   var album_search_str = $("#album_search_text").val().trim();
+  console.log("str = " + album_search_str);
 
   if (album_search_str != "") {
     $("#album_search_text").val("");
-    var queryURL_Album_Search = back_end_proxy + "https://api.deezer.com/search?q=album:" + album_search_str + "&api_key=" + api_key;
+    var queryURL_Album_Search = back_end_proxy + "https://api.deezer.com/search?q=album:" + album_search_str + "&api_key=" + deezer_api_key;
 
     $.get({ url: queryURL_Album_Search, }).then(function (response) {
       var album_ids = [];
       var album_titles = [];
       var mydata = response.data;
+      console.log(response.data);
       mydata.forEach(function (item, i) {
         // need to pass on mulitple listings of same album
         if ((album_ids.indexOf(item.album.id) == -1) && (album_titles.indexOf(item.album.title) == -1)) {
           album_ids.push(item.album.id);
           album_titles.push(item.album.title);
+          console.log(item.album.id);
           var new_list_item = $("<div>");
           new_list_item.addClass("dropdown-item");
           new_list_item.attr("data-album-id", item.album.id);
@@ -99,9 +113,34 @@ $("#album_search_button").on("click", function () {
   }
 });
 
+var summary_api_key = "4449581c4e4db7c380fae2d8fd50142d";
+var summary_method = "artist.getinfo";
+var summaryURL = "http://ws.audioscrobbler.com/2.0/?method=" + summary_method + "&api_key=" + summary_api_key + "&format=json&autocorrect=1";
+
+// $("#album_search_text").on("keyup", function () {
+// $("#album_search_dropdown").empty();
+// });
+
+
+
+function artist(summaryURL) {
+  $.ajax({
+    url: summaryURL,
+    method: "GET",
+  })
+    .then(function (response) {
+      var results = (response.artist.bio.summary);
+      // console.log(results)
+      var values = results.split(" <").shift();
+
+      $("#bio").text(values);
+    });
+}
 
 //add to list of viewed albums dropdown upon push to firebase
 database.ref().on("child_added", function (snapshot) {
+
+  console.log("add_child");
 
   var album = {
     artist: snapshot.val().artist,
@@ -180,10 +219,16 @@ function delete_firebase_element(album_id) {
 // take album id - get info from deezer and put up song play widget
 function show_album(album_id) {
 
-  var queryURL_Album = back_end_proxy + "https://api.deezer.com/album/" + album_id + "&api_key=" + api_key;
+  // $("#musicInfo").empty();
+  // $("#widgetPlacement").empty();
 
-  $("#band-info").empty();
-  $.get({ url: queryURL_Album, }).then(function (response) {
+  console.log("albumid = ", album_id);
+
+  var queryURL_Album = back_end_proxy + "https://api.deezer.com/album/" + album_id + "&api_key=" + deezer_api_key;
+  // var queryURL_Album_Search = back_end_proxy + "https://api.deezer.com/search?q=album:" + album_search_str + "&api_key=" + deezer_api_key;
+
+  $.get({ url: queryURL_Album}).then(function (response) {
+    console.log("Here:", response)
 
     var album = {
       artist: response.artist.name,
@@ -192,18 +237,28 @@ function show_album(album_id) {
       id: album_id
     }
 
+    $("#artistName").text(album.artist)
+
+    var album_cover = $("<img>");
+    album_cover.attr("src", album.cover);
+    $("#artistImage").html(album_cover);
+
+    var artistBio = "&artist=" + album.artist;
+    summaryURL += artistBio;
+    artist(summaryURL);
+
     if (!check_exists(album))
       database.ref().push(album);
 
     current_album = album;
 
-    $("#band-info").append("<br>" + album.artist + " - ");
-    $("#band-info").append(album.title + "<br><br>");
+    // $("#band-info").append("<br>" + album.artist + " - ");
+    // $("#band-info").append(album.title + "<br><br>");
 
-    var $cover_img = $("<img>");
-    $cover_img.attr("src", album.cover);
-    $("#band-info").append($cover_img);
-    $("#band-info").append("<br><br>");
+    // var $cover_img = $("<img>");
+    // $cover_img.attr("src", album.cover);
+    // $("#band-info").append($cover_img);
+    // $("#band-info").append("<br><br>");
   });
 
 
@@ -226,6 +281,5 @@ function show_album(album_id) {
       w[i].appendChild(el);
     }
   }());
-
 }
 

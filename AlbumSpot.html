@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>BandSpot</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+  <!-- Firebase References -->
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+  <script src="https://kit.fontawesome.com/0eb0065a69.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Rock+Salt&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <header>
+    <button id="clear_list_button" type="button">Clear viewed list</button>
+    <button id="delete_item_button" type="button">Delete current album from viewed list</button>
+
+    <div id="navBar">
+
+      <input id="album_search_text" type="text" class="form-control" aria-label="Text input with dropdown button"
+        placeholder="Search Here...">
+      <div class="input-group-append">
+        <button id="album_search_button" class="dropdown-toggle" type="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Album Search</button>
+        <div id="album_search_dropdown" class="dropdown-menu">
+        </div>
+      </div>
+
+      <div id="title">
+        AlbumSpot
+      </div>
+
+      <!-- <div class="input-group-append">
+          <button id="album_search_button" class="dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Album Search</button>
+          <div id="viewed_list_dropdown" class="dropdown-menu">
+          </div>
+        </div> -->
+
+      <div class="dropdown" id="history">
+        <button class="mainmenubtn">Previously Viewed</button>
+        <div id="viewed_list_dropdown" class="dropdown-menu">
+          <!-- <div id="listAlbum"></div> -->
+          <!-- <div class="listPicture"></div> -->
+          <!-- <small class="listArtist"></small> -->
+          <!-- </a> -->
+        </div>
+      </div>
+  </header>
+
+  <section>
+    <div id="musicInfo">
+      <div id="artistName">
+      </div>
+      <div id="artistImage">
+      </div>
+      <div id="bio">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div id="widgetPlacement">
+      <div id="widget">
+        <div class="deezer-widget-player" data-scrolling="no" data-frameborder="0" data-allowTransparency="true"
+          data-width="600" data-height="350"></div>
+      </div>
+
+      <table class="ticketMaster">
+        <thead>
+          <tr>
+            <th scope="col">Event Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Venue Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</body>
+<script src="assets/javascript/code.js"></script>
+
+</html>
