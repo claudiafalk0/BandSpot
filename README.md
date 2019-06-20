@@ -1,1 +1,2 @@
 # Project1
+For this project, our group decided to build a website which would allow the user to search by artist and display the artists album, play a snippet of the songs in that album, and by using the users IP address find events for that artist in their area. We also allowed the user to view their most recent searches by using a firebase database to save the users search. In this project, our group used firebase, a song widget, four apis, javascript and css for styling.
